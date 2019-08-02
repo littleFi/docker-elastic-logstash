@@ -2,8 +2,8 @@
 docker版的es和logstash
 
 es 运行
-docker network create elasticsearch
-docker run -d --name elasticsearch -v /docker/conf/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml --net elasticsearch -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" elasticsearch:5.6.16
+	docker network create elasticsearch
+	docker run -d --name elasticsearch -v /docker/conf/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml --net elasticsearch -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" elasticsearch:5.6.16
 
 logstash运行
 
