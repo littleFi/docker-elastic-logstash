@@ -1,0 +1,32 @@
+input {
+    jdbc {
+        jdbc_connection_string => "jdbc:mysql://rm-bp12e29671ibrdu5eyo.mysql.rds.aliyuncs.com:3306/fridge_bi?useUnicode=true&characterEncoding=utf-8&useSSL=false"
+        jdbc_user => "fridge_bi"
+        jdbc_password => "8RpfzMkjjgwz@hwS"
+
+        jdbc_driver_library => "/logstash/jar/mysql-connector-java-5.1.47.jar"
+        jdbc_driver_class => "com.mysql.jdbc.Driver"
+        jdbc_paging_enabled => true
+        jdbc_page_size => "1000000"
+        jdbc_default_timezone => "Asia/Shanghai"
+        statement => "select * from f_bi_distribution_address where id > :sql_last_value"
+        schedule => "* * * * *"
+        record_last_run => true
+        tracking_column => "id"
+        clean_run => false
+    }
+
+}
+
+filter {
+
+}
+
+output{
+    elasticsearch {
+        hosts => ["116.62.185.230:9200"]
+        index => "distribution_address"
+        document_type => "doc"
+        document_id => "%{id}"        
+    }
+}
